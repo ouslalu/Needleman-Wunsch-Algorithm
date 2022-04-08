@@ -17,9 +17,9 @@ def initializaiton_2(reference, query):
     for j in range(2, (len_query+2), 1):
         big_matrix[j][0] = list_query[j]
     for t in range(1,(len_reference+1),1):
-        big_matrix[1][t+1] = -1*t
+        big_matrix[1][t+1] = penalty*t
     for s in range(1,(len_query+1),1):
-        big_matrix[s+1][1]= -1*s
+        big_matrix[s+1][1]= penalty*s
         
     return big_matrix
 
@@ -39,9 +39,9 @@ def scoring():
         for q in range(1,columns):
             if p > 1 and q > 1:
                 if array[0][q]==array[p][0]:
-                    score_calc = (array[p-1][q-1]+1),(array[p][q-1]-1),(array[p-1][q]-1)
+                    score_calc = (array[p-1][q-1]+matching_score),(array[p][q-1]+penalty),(array[p-1][q]+penalty)
                 else:
-                    score_calc = (array[p-1][q-1]-1),(array[p][q-1]-1),(array[p-1][q]-1)
+                    score_calc = (array[p-1][q-1]-matching_score),(array[p][q-1]+penalty),(array[p-1][q]+penalty)
             else:
                 score_calc = (-(row+1),array[p][q])
                 
@@ -99,6 +99,8 @@ def backtracing():
 if __name__ == "__main__":
     query = input("Query sequence: ").upper()
     reference = input("Reference sequence: ").upper()
+    penalty = int(input("Penalty: "))
+    matching_score = int(input("Matching Score: "))
     backtracing()
     
     
