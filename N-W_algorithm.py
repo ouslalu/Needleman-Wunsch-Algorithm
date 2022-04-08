@@ -88,7 +88,7 @@ def backtracing():
             list_ref.append("-")
             last_row=last_row-1
     
-    aligned_sequences = pd.DataFrame([list_ref,list_query])
+    aligned_sequences = pd.DataFrame([list_ref[::-1],list_query[::-1]])
     aligned_sequences.to_csv("aligned_sequence.csv", index=False)
     print("-----------Global Alignment-----------")
     print(aligned_sequences)
